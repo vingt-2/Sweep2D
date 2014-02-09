@@ -48,7 +48,7 @@ public class Renderer implements GLSurfaceView.Renderer
 	public void onSurfaceCreated(GL10 gl, EGLConfig config) 
 	{
 
-		gl.glClearColor(1f, 0.1f, 0.1f, 0.0f);
+		gl.glClearColor(0.1f, 0.1f, 0.1f, 0.0f);
 		
 		mainGame = new MainGame(renderContext,this);
 		mainGame.init();

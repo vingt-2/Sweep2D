@@ -139,6 +139,11 @@ public class SharedResources
 				GLES20.glDeleteProgram(programID);
 				programID = 0;
 			}
+			Log.i(TAG,"Shader loaded with ID: " + programID);
+		}
+		else
+		{
+			Log.e(TAG,"Could not link the shader");
 		}
 
 		shaderPrograms.put(name,Integer.valueOf(programID));
@@ -162,6 +167,7 @@ public class SharedResources
 				GLES20.glDeleteShader(shader);
 				shader = 0;
 			}
+			Log.i(TAG, "Shader successfully loaded");
 		}
 		return shader;
 	}

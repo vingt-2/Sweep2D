@@ -11,9 +11,9 @@ import com.sweep2d.Maths.Vector2;
 public class Player extends GameChar 
 {
 	
-	ParticleEffects effect = new ParticleEffects(transform,2000);
-	long lastTime = 0;
-	final static long effectTimeThreshold = 1000; // wait 000ms to toggle effect
+	//ParticleEffects effect = new ParticleEffects(transform,2000);
+	//long lastTime = 0;
+	//final static long effectTimeThreshold = 1000; // wait 000ms to toggle effect
 	
 	public Player()
 	{
@@ -28,11 +28,11 @@ public class Player extends GameChar
 		super.Update();
 		
 		// Player Stuff
-		effect.Update();
+		//effect.Update();
 		PlayerControls();
 		
 		
-		Vector2 charFrontInWorldCoordinates = transform.LocalDirectionToWorld(new Vector2(0,1)).Normalized();
+		//Vector2 charFrontInWorldCoordinates = transform.LocalDirectionToWorld(new Vector2(0,1)).Normalized();
 //		MainGame.debug.DrawLine(transform.position,charFrontInWorldCoordinates,100,Color.Blue);
 		
 	}
@@ -52,29 +52,29 @@ public class Player extends GameChar
 		{
 			Vector2 objectFrontInWorldCoordinates = transform.LocalDirectionToWorld(new Vector2(0,1));
 			rigidBody.PushForce(Vector2.Scale(1000, objectFrontInWorldCoordinates),ForceMode.Impulse);
-			effect.TurnOn();
+			//effect.TurnOn();
 		}
 		else
 		{
-			effect.TurnOff();
+			//effect.TurnOff();
 		}
 		
 //		if(MainGame.controls.isPressed(KeyEvent.VK_SPACE))
 		if(true)
 		{
-			long time = System.currentTimeMillis();
-			if( time - lastTime >  effectTimeThreshold)
-			{
-				if(!effect.isTurnedOn)
-				{
-					effect.TurnOn();
-				}
-				else				
-				{
-					effect.TurnOff();
-				}
-				lastTime = time;
-			}
+//			long time = System.currentTimeMillis();
+//			if( time - lastTime >  effectTimeThreshold)
+//			{
+//				if(!effect.isTurnedOn)
+//				{
+//					effect.TurnOn();
+//				}
+//				else				
+//				{
+//					effect.TurnOff();
+//				}
+//				lastTime = time;
+//			}
 		}
 	}
 	

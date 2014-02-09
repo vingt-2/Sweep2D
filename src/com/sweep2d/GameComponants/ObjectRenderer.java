@@ -111,7 +111,7 @@ public class ObjectRenderer
 	public boolean Draw(Matrix4 projectionMatrix, Matrix4 viewMatrix)
 	{
 		GLES20.glUseProgram(programID);
-		
+				
 		Matrix4 mvp = Matrix4.Multiply(projectionMatrix, Matrix4.Multiply(viewMatrix,parent.transform.transformMatrix));
 			
 		float[] mvpArray = mvp.GetOneDimensionalArray();
@@ -120,7 +120,6 @@ public class ObjectRenderer
 		
         GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureID);
-        
         
         GLES20.glUniform1i(textureSamplerLocation, 0);
 		
