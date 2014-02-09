@@ -9,6 +9,7 @@ import android.content.Context;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
+import android.util.Log;
 
 import java.util.ArrayList;
 ////
@@ -25,6 +26,7 @@ import com.sweep2d.Maths.Vector2;
 public class Renderer implements GLSurfaceView.Renderer
 {	
 	public static final int RERFRESH_RATE = 60 ; // Refresh rate fixed at (1/60)hz, leading to 60frame/s
+	public static final String DEBUG_TAG = "[Renderer]";
 	
 	public static Context renderContext;
 	public Vector2 renderSize;
@@ -61,6 +63,7 @@ public class Renderer implements GLSurfaceView.Renderer
 
 		for(int i =0; i<renderVector.size();i++)
 		{
+			Log.i(DEBUG_TAG,"Drawing "+ renderVector.size()+ " items.");
 			renderVector.get(i).Draw(projection,view);
 		}
 

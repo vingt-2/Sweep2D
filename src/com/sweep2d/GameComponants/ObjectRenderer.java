@@ -15,6 +15,7 @@ import com.sweep2d.Maths.*;
 
 import android.content.Context;
 import android.opengl.GLES20;
+import android.opengl.GLES30;
 import android.util.Log;
 
 public class ObjectRenderer 
@@ -27,7 +28,7 @@ public class ObjectRenderer
 	private final String UNIFORM_MATRIX_MVP = "uMVPMatrix";
 	
 	
-	private int vertexArraySize = Shape.Square.verticeData.length;
+	private int vertexArraySize = Shape.Triangle.verticeData.length;
 
 	private GameChar parent;
 	private int textureID;
@@ -76,6 +77,7 @@ public class ObjectRenderer
 	
 	public void GenerateVertexArray(float[] arrayBuffer,int bufferSize, int valuesPerElement,int attributeNumber)
 	{
+		FloatBuffer.allocate(arrayBuffer.length);
         FloatBuffer bufferData = ByteBuffer.allocateDirect(arrayBuffer.length * FLOAT_SIZE_BYTES).order(ByteOrder.nativeOrder()).asFloatBuffer();
         bufferData.put(arrayBuffer).position(0);
         
@@ -91,7 +93,7 @@ public class ObjectRenderer
 			valuesPerElement,			// size
 			GLES20.GL_FLOAT,			// type
 			false,						// normalized?
-			0,                          // stride
+			3*FLOAT_SIZE_BYTES,         // stride
 			0							// array buffer offset
 		);
 		
@@ -103,7 +105,7 @@ public class ObjectRenderer
 	public void LoadShape()
 	{
 		int aPositionHandle = GLES20.glGetAttribLocation(programID, "aPosition");
-		GenerateVertexArray(shape.verticeData, shape.verticeData.length*FLOAT_SIZE_BYTES, 4, aPositionHandle);
+		GenerateVertexArray(shape.verticeData, shape.verticeData.length*FLOAT_SIZE_BYTES, 3, aPositionHandle);
 		int aUVHandle 		= GLES20.glGetAttribLocation(programID, "aTextureCoord");
 		GenerateVertexArray(shape.UVData, shape.UVData.length*FLOAT_SIZE_BYTES,2, aUVHandle);
 	}
@@ -123,12 +125,14 @@ public class ObjectRenderer
         
         GLES20.glUniform1i(textureSamplerLocation, 0);
 		
+        Log.i("[ObjectRenderer]","Enabling " + vertexArrayList.size() + " attribs");
+        
 		for(GLVertexArrayObject element : vertexArrayList)
 		{
 			GLES20.glEnableVertexAttribArray(element.attributeNumber);
 		}
 		
-		GLES20.glDrawArrays(GLES20.GL_TRIANGLES, 0, vertexArraySize);
+		GLES20.glDrawArrays(GLES20.GL_LINES, 0, vertexArraySize);
 		
 		for(GLVertexArrayObject element : vertexArrayList)
 		{
@@ -145,18 +149,19 @@ public class ObjectRenderer
 
 	public enum Shape
 	{
-		Square
+		Triangle
 		( 
 							 
-				new float[] { 	-10f, -10f, 0f, 1f,
-								10f, -10f, 0f, 1f,
-								10f, 10f, 0f, 1f,
-								-10f, 10f, 0f, 1f
+				new float[] {
+				            // X, Y, Z, U, V
+				            -1.0f, -0.5f, 0,
+				            1.0f, -0.5f, 0,
+				            0.0f,  1.11803399f, 0
 							},
-				new float[] { 	0f, 1f,
-								1f, 1f,
-								1f, 0f,
-								0f, 0f
+				new float[] { 
+								-0.5f, 0.0f,
+								1.5f, 0.0f,
+								0.5f, 1.61f
 							}
 		);
 

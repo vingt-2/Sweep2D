@@ -18,9 +18,10 @@ public class Player extends GameChar
 	public Player()
 	{
 		super();
-		objectRenderer.shape= Shape.Square;
+		objectRenderer.shape= Shape.Triangle;
 		objectRenderer.AssignShaderProgram("simpleShader");
 		objectRenderer.SetTexture("rocket_ship");
+		objectRenderer.LoadShape();
 	}
 	
 	public void Update()

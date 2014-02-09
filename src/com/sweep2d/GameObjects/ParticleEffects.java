@@ -35,7 +35,7 @@ public class ParticleEffects extends GameObject
 					if( isTurnedOn )
 					{	
 						particleArray[i] = new Particles(ran.nextInt(1500)+3000,new Vector2(transform.position.x,transform.position.y));
-						particleArray[i].objectRenderer.shape= Shape.Square;
+						particleArray[i].objectRenderer.shape= Shape.Triangle;
 						particleArray[i].objectRenderer.SetTexture("smoke");
 						particleArray[i].rigidBody.frictionCoefficient = 0.01f;
 						particleArray[i].rigidBody.PushForce(new Vector2((ran.nextInt(20))*15*back.x,(ran.nextInt(20))*50*back.y),ForceMode.Impulse);
