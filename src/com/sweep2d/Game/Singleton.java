@@ -13,5 +13,6 @@ public class Singleton
 	
 	public SharedResources sharedResources;
 	public Renderer		renderer;
+	public Controls 	controls;
 	
 }

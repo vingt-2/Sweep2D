@@ -152,14 +152,20 @@ public class ObjectRenderer
 							 
 				new float[] {
 				            // X, Y, Z, U, V
-				            -1.0f, -0.5f, 0,
-				            1.0f, -0.5f, 0,
-				            0.0f,  1.11803399f, 0
+				            0f, 0f, 0f,
+				            10.0f, 0f, 0f,
+				            0f,  10f, 0f,
+				            0f, 10f, 0f,
+				            10f, 0f, 0f,
+				            10f,  10f, 0f
 							},
 				new float[] { 
-								-0.5f, 0.0f,
-								1.5f, 0.0f,
-								0.5f, 1.61f
+								0f, 0f,
+								1f, 0f,
+								0f, 1f,
+								0f, 1f,
+								1f, 0f,
+								1f, 1f
 							}
 		);
 

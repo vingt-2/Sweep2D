@@ -9,6 +9,7 @@ import android.content.Context;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
+import android.util.DisplayMetrics;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -41,7 +42,9 @@ public class Renderer implements GLSurfaceView.Renderer
 	{
 		renderContext = context;
 		renderVector = new ArrayList<ObjectRenderer>();
-		renderSize = new Vector2(100,100);
+		renderSize = new Vector2(context.getResources().getDisplayMetrics().widthPixels,
+									context.getResources().getDisplayMetrics().heightPixels);
+		mainGame.Screen_Size = renderSize;
 		projection = new Matrix4(1f);
 		view = new Matrix4(1f);
 	}
@@ -81,7 +84,8 @@ public class Renderer implements GLSurfaceView.Renderer
 	{
 		GLES20.glViewport(0, 0, width, height);
 		float ratio = (float) width / height;
-		projection = GLAlgebra.orthographicProjection(0f, width, height, 0f, 0.11f, 1000f);
+		//projection = GLAlgebra.orthographicProjection(-width/2, width/2, -height/2, height/2, 0.11f, 1000f);
+		projection = GLAlgebra.orthographicProjection(0, width, height, 0, 0.11f, 1000f);
 	}
 
 

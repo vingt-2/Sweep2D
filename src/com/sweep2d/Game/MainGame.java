@@ -33,6 +33,7 @@ public class MainGame
 	{
 		singleton.sharedResources = new SharedResources(context);
 		singleton.renderer = render;
+		singleton.controls = new Controls();
 	}
 
 	
@@ -51,9 +52,9 @@ public class MainGame
 		);
 
 		player = new Player();
-		player.transform.size = new Vector2(30,30);
-		player.rigidBody.frictionCoefficient = 0.1f;
-		player.rigidBody.PushForce(new Vector2(100000,0),ForceMode.Impulse);
+		player.transform.size = new Vector2(20,20);
+		player.rigidBody.frictionCoefficient = 0.01f;
+		//player.rigidBody.PushForce(new Vector2(100000,0),ForceMode.Impulse);
 	}
 
 	public void Update()
