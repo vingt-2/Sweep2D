@@ -1,6 +1,8 @@
 package com.sweep2d.GameObjects;
 
 //import java.awt.event.KeyEvent;
+import android.util.Log;
+
 import com.sweep2d.Game.MainGame;
 import com.sweep2d.GameComponants.ObjectRenderer.Shape;
 import com.sweep2d.GameComponants.RigidBody.ForceMode;
@@ -20,7 +22,7 @@ public class Player extends GameChar
 		super();
 		objectRenderer.shape= Shape.Triangle;
 		objectRenderer.AssignShaderProgram("simpleShader");
-		objectRenderer.SetTexture("rocket_ship");
+		//objectRenderer.SetTexture("rocket_ship");
 		objectRenderer.LoadShape();
 	}
 	
@@ -34,7 +36,7 @@ public class Player extends GameChar
 		
 		
 		//Vector2 charFrontInWorldCoordinates = transform.LocalDirectionToWorld(new Vector2(0,1)).Normalized();
-//		MainGame.debug.DrawLine(transform.position,charFrontInWorldCoordinates,100,Color.Blue);
+		//		MainGame.debug.DrawLine(transform.position,charFrontInWorldCoordinates,100,Color.Blue);
 		
 	}
 	

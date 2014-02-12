@@ -23,10 +23,9 @@ public class ObjectRenderer
 	public Shape shape;
 	
 	private final int FLOAT_SIZE_BYTES = 4;
-	
 	private final String UNIFORM_TEX_SAMPLER = "sTexture";
 	private final String UNIFORM_MATRIX_MVP = "uMVPMatrix";
-	
+	private final String DEBUG_TAG = "[ObjectRenderer]";
 	
 	private int vertexArraySize = Shape.Triangle.verticeData.length;
 
@@ -78,26 +77,25 @@ public class ObjectRenderer
 	public void GenerateVertexArray(float[] arrayBuffer,int bufferSize, int valuesPerElement,int attributeNumber)
 	{
 		FloatBuffer.allocate(arrayBuffer.length);
-        FloatBuffer bufferData = ByteBuffer.allocateDirect(arrayBuffer.length * FLOAT_SIZE_BYTES).order(ByteOrder.nativeOrder()).asFloatBuffer();
+        FloatBuffer bufferData = ByteBuffer.allocateDirect(bufferSize).order(ByteOrder.nativeOrder()).asFloatBuffer();
         bufferData.put(arrayBuffer).position(0);
         
-		IntBuffer bufferID = IntBuffer.allocate(1);
+		IntBuffer bufferID = (IntBuffer.allocate(1));
+		bufferID.position(0);
 		
-		GLES20.glGenBuffers(bufferSize, bufferID);
-		GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER,bufferID.get());
+		GLES20.glGenBuffers(1, bufferID);
+		GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER,bufferID.get(0));
 		GLES20.glBufferData(GLES20.GL_ARRAY_BUFFER, bufferSize, bufferData, GLES20.GL_STATIC_DRAW);
 		
 		GLES20.glVertexAttribPointer
 		(
-			attributeNumber,			// attribute
-			valuesPerElement,			// size
-			GLES20.GL_FLOAT,			// type
-			false,						// normalized?
-			3*FLOAT_SIZE_BYTES,         // stride
-			0							// array buffer offset
+			attributeNumber,                      // attribute
+			valuesPerElement,                     // size
+			GLES20.GL_FLOAT,                      // type
+			false,                                // normalized?
+			valuesPerElement*FLOAT_SIZE_BYTES,    // stride
+			0				                      // array buffer offset
 		);
-		
-		
 		
 		vertexArrayList.add(new GLVertexArrayObject(bufferID.get(),attributeNumber,valuesPerElement));	
 	}
@@ -115,7 +113,7 @@ public class ObjectRenderer
 		GLES20.glUseProgram(programID);
 				
 		Matrix4 mvp = Matrix4.Multiply(projectionMatrix, Matrix4.Multiply(viewMatrix,parent.transform.transformMatrix));
-			
+		
 		float[] mvpArray = mvp.GetOneDimensionalArray();
 
 		GLES20.glUniformMatrix4fv(mvpLocation, 1, false, mvpArray,0);
@@ -125,14 +123,14 @@ public class ObjectRenderer
         
         GLES20.glUniform1i(textureSamplerLocation, 0);
 		
-        Log.i("[ObjectRenderer]","Enabling " + vertexArrayList.size() + " attribs");
+        //Log.i(DEBUG_TAG,"Enabling " + vertexArrayList.size() + " attribs");
         
 		for(GLVertexArrayObject element : vertexArrayList)
 		{
 			GLES20.glEnableVertexAttribArray(element.attributeNumber);
 		}
 		
-		GLES20.glDrawArrays(GLES20.GL_LINES, 0, vertexArraySize);
+		GLES20.glDrawArrays(GLES20.GL_TRIANGLES, 0, vertexArraySize);
 		
 		for(GLVertexArrayObject element : vertexArrayList)
 		{

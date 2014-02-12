@@ -75,14 +75,14 @@ public class Matrix4
 	public String toString()
 	{
 		String outputString = "{ ";
-		for(int i = 0; i<3; i++)
+		for(int i = 0; i<4; i++)
 		{
 			outputString+="{ ";
-			for(int j = 0; j<3 ; j++)
+			for(int j = 0; j<4 ; j++)
 			{
 				outputString+= array[i][j] + ",";
 			}
-			outputString+= "}, ";
+			outputString+= "}\n ";
 		}
 		outputString += "}";
 		return outputString;

@@ -9,6 +9,7 @@ import com.sweep2d.Engine.Renderer;
 import com.sweep2d.Engine.Resource;
 import com.sweep2d.Engine.SharedResources;
 import com.sweep2d.Engine.SharedResources.ResourceType;
+import com.sweep2d.GameComponants.RigidBody.ForceMode;
 import com.sweep2d.GameObjects.GameChar;
 import com.sweep2d.GameObjects.Player;
 import com.sweep2d.Helpers.Debug;
@@ -50,8 +51,9 @@ public class MainGame
 		);
 
 		player = new Player();
-		player.transform.size = new Vector2(3,3);
+		player.transform.size = new Vector2(30,30);
 		player.rigidBody.frictionCoefficient = 0.1f;
+		player.rigidBody.PushForce(new Vector2(100000,0),ForceMode.Impulse);
 	}
 
 	public void Update()

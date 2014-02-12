@@ -63,7 +63,7 @@ public class Renderer implements GLSurfaceView.Renderer
 
 		for(int i =0; i<renderVector.size();i++)
 		{
-			Log.i(DEBUG_TAG,"Drawing "+ renderVector.size()+ " items.");
+			//Log.i(DEBUG_TAG,"Drawing "+ renderVector.size()+ " items.");
 			renderVector.get(i).Draw(projection,view);
 		}
 
@@ -81,7 +81,7 @@ public class Renderer implements GLSurfaceView.Renderer
 	{
 		GLES20.glViewport(0, 0, width, height);
 		float ratio = (float) width / height;
-		projection = GLAlgebra.orthographicProjection(0f, width, height, 0f, 1f, 1f);
+		projection = GLAlgebra.orthographicProjection(0f, width, height, 0f, 0.11f, 1000f);
 	}
 
 

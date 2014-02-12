@@ -1,5 +1,7 @@
 package com.sweep2d.GameComponants;
 
+import android.util.Log;
+
 import com.sweep2d.Maths.*;
 
 public class Transform 
@@ -29,7 +31,7 @@ public class Transform
 	
 	public void UpdateTransform()
 	{
-		Matrix4 translationMatrix = new Matrix4(0);
+		Matrix4 translationMatrix = new Matrix4(1);
 		float[] fourthEntrie = { position.x, position.y, 0, 1};
 		translationMatrix.array[3] = fourthEntrie;
 		
@@ -39,7 +41,7 @@ public class Transform
 						{
 							{(float)Math.cos(rotation)	, (float) (-1 * Math.sin(rotation)),0f,0f	},
 							{(float)Math.sin(rotation)	, (float) Math.cos(rotation),		0f,0f	},
-							{	0f						, 0f,								0f,0f	},
+							{	0f						, 0f,								1f,0f	},
 							{	0f						, 0f,								0f,1f	},
 						});
 		
@@ -50,7 +52,7 @@ public class Transform
 						{
 								{size.x, 0, 0, 0},
 								{0,	size.y,	0, 0},
-								{0,	0,		0, 0},
+								{0,	0,		1, 0},
 								{0,	0,		0, 1}
 						}
 						);
