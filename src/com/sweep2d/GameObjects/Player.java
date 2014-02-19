@@ -16,7 +16,7 @@ import com.sweep2d.Maths.Vector2;
 public class Player extends GameChar 
 {
 	
-	ParticleEffects effect = new ParticleEffects(transform,200);
+	ParticleEffects effect = new ParticleEffects(transform,200,60);
 	long lastTime = 0;
 	final static long effectTimeThreshold = 1000; // wait 000ms to toggle effect
 	

@@ -10,45 +10,65 @@ import com.sweep2d.Maths.Vector2;
 
 public class ParticleEffects extends GameObject
 {
-	public boolean isTurnedOn = false;
+	public int spawnRate;
+	public boolean isTurnedOn;
 	public Transform transform;
-
 	private Particles[] particleArray;
+	
+	private long lastTime;
+	
 
-	public ParticleEffects(Transform transform,int maxParticles)
+	public ParticleEffects(Transform transform,int maxParticles,int spawnRate)
 	{
 		this.transform = transform;
-
-		particleArray = new Particles[maxParticles];
+		this.spawnRate = spawnRate;
+		this.particleArray = new Particles[maxParticles];
+		this.isTurnedOn = false;
+		lastTime = System.currentTimeMillis();
 	}
 
 	public void Update()
 	{
+		long currentTime = System.currentTimeMillis();
+		
 		Random ran = new Random();
 		Vector2 back = transform.LocalDirectionToWorld(new Vector2(0,-1)).Normalized();
-		for(int i = 0; i < particleArray.length; i++)
+
+		int timeElapsed = (int) (currentTime - lastTime);
+		boolean newSpawn = timeElapsed > (1000 / spawnRate);
+		if( newSpawn )
 		{
-			if( particleArray[i] == null )
-			{
-				if(ran.nextInt(1000) % 217 == 0 )
+			if( isTurnedOn )
+			{	
+				int indexInArray = -1;
+				for( int i = 0; i < particleArray.length; i++)
 				{
-					if( isTurnedOn )
-					{	
-						particleArray[i] = new Particles(ran.nextInt(1500)+3000,new Vector2(transform.position.x,transform.position.y));
-						particleArray[i].objectRenderer.shape= Shape.Triangle;
-						particleArray[i].objectRenderer.AssignShaderProgram("simpleShader");
-						particleArray[i].objectRenderer.SetTexture("smoke");
-						particleArray[i].objectRenderer.LoadShape();
-						particleArray[i].rigidBody.SetPosition(Vector2.Add(transform.position, Vector2.Scale(10, back)));
-						particleArray[i].rigidBody.frictionCoefficient = 0.01f;
-						particleArray[i].rigidBody.PushForce(Vector2.Scale(100,new Vector2((ran.nextInt(20))*1*back.x,(ran.nextInt(20))*5*back.y)),ForceMode.Impulse);
-						particleArray[i].transform.size = new Vector2(10*((1+ran.nextInt(2)) - 0.075f*ran.nextInt(50)));
-						particleArray[i].rigidBody.PushTorque((ran.nextInt(20) -10) * 10, ForceMode.Impulse);
-						particleArray[i].objectRenderer.opacity = 0.8f;
+					if( particleArray[i] == null)
+					{
+						indexInArray = i;
 					}
 				}
+				if( indexInArray != -1)
+				{
+					particleArray[indexInArray] = new Particles(ran.nextInt(1500)+3000,new Vector2(transform.position.x,transform.position.y));
+					particleArray[indexInArray].objectRenderer.shape= Shape.Triangle;
+					particleArray[indexInArray].objectRenderer.AssignShaderProgram("simpleShader");
+					particleArray[indexInArray].objectRenderer.SetTexture("smoke");
+					particleArray[indexInArray].objectRenderer.LoadShape();
+					particleArray[indexInArray].rigidBody.SetPosition(Vector2.Add(transform.position, Vector2.Scale(10, back)));
+					particleArray[indexInArray].rigidBody.frictionCoefficient = 0.01f;
+					particleArray[indexInArray].rigidBody.PushForce(Vector2.Scale(100,new Vector2((ran.nextInt(20))*1*back.x,(ran.nextInt(20))*5*back.y)),ForceMode.Impulse);
+					particleArray[indexInArray].transform.size = new Vector2(10*((1+ran.nextInt(2)) - 0.075f*ran.nextInt(50)));
+					particleArray[indexInArray].rigidBody.PushTorque((ran.nextInt(20) -10) * 10, ForceMode.Impulse);
+					particleArray[indexInArray].objectRenderer.opacity = 0.8f;
+				}
 			}
-			else
+			lastTime = currentTime;
+		}
+		
+		for(int i=0; i < particleArray.length; i++)
+		{
+			if( particleArray[i] != null )
 			{
 				if( particleArray[i].TimeToDie() )
 				{

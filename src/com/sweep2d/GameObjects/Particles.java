@@ -21,27 +21,34 @@ public class Particles extends GameChar
 
 	public void Update()
 	{  
-		long currentTime = System.currentTimeMillis();
-		if(currentTime - lastTime > (1000 * 1f/60f))
+		if(!isDeleted)
 		{
-			super.Update();
-			long timeLived = currentTime - creationTime;
-			
-			objectRenderer.opacity = 1f - (float) timeLived/lifeTime;
-			
-			Vector2 toPlayer = Vector2.Add(MainGame.player.transform.position,transform.position.negate());
-	
-			//MainGame.debug.DrawLine(transform.position,toPlayer,toPlayer.GetLength());
-	
-			if(toPlayer.GetLength() < 200)
+			long currentTime = System.currentTimeMillis();
+			if(currentTime - lastTime > (1000 * 1f/60f))
 			{
-				objectRenderer.opacity *= toPlayer.GetLength()/200;
-				if(toPlayer.GetLength() < 100)
+				super.Update();
+				long timeLived = currentTime - creationTime;
+				
+				objectRenderer.opacity = 1f - (float) timeLived/lifeTime;
+				
+				Vector2 toPlayer = Vector2.Add(MainGame.player.transform.position,transform.position.negate());
+		
+				//MainGame.debug.DrawLine(transform.position,toPlayer,toPlayer.GetLength());
+		
+				if(toPlayer.GetLength() < 200)
 				{
-					rigidBody.PushForce(toPlayer.Normalized().Scaled(-200*MainGame.player.rigidBody.velocity.GetLength()), ForceMode.Impulse);
+					objectRenderer.opacity *= toPlayer.GetLength()/200;
+					if(toPlayer.GetLength() < 100)
+					{
+						rigidBody.PushForce(toPlayer.Normalized().Scaled(-200*MainGame.player.rigidBody.velocity.GetLength()), ForceMode.Impulse);
+					}
 				}
+				lastTime = currentTime;
 			}
-			lastTime = currentTime;
+			if(TimeToDie())
+			{
+				this.Delete();
+			}
 		}
 	}
 
