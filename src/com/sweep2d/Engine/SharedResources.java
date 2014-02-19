@@ -9,7 +9,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 import java.io.InputStream;
-import com.sweep2d.Game.R;
 import com.sweep2d.Game.MainGame;
 
 import android.content.Context;
