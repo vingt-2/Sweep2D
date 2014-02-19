@@ -3,6 +3,5 @@ gen/
 doc/
 libs/
 res/
-*.xml
 *.txt
 *.properties
