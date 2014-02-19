@@ -97,7 +97,7 @@ public class Matrix4
 			float newEntrie = 0;
 			for(int j=0 ; j<4; j++)
 			{
-				newEntrie = matrix.array[j][i] * vecArray[j];
+				newEntrie += matrix.array[i][j] * vecArray[j];
 			}
 			newVec[i] = newEntrie;
 		}

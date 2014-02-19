@@ -36,10 +36,12 @@ public class ParticleEffects extends GameObject
 					{	
 						particleArray[i] = new Particles(ran.nextInt(1500)+3000,new Vector2(transform.position.x,transform.position.y));
 						particleArray[i].objectRenderer.shape= Shape.Triangle;
+						particleArray[i].objectRenderer.AssignShaderProgram("simpleShader");
 						particleArray[i].objectRenderer.SetTexture("smoke");
+						particleArray[i].objectRenderer.LoadShape();
 						particleArray[i].rigidBody.frictionCoefficient = 0.01f;
-						particleArray[i].rigidBody.PushForce(new Vector2((ran.nextInt(20))*15*back.x,(ran.nextInt(20))*50*back.y),ForceMode.Impulse);
-						particleArray[i].transform.size = new Vector2((1+ran.nextInt(2)) - 0.075f*ran.nextInt(50));
+						particleArray[i].rigidBody.PushForce(Vector2.Scale(100,new Vector2((ran.nextInt(20))*1*back.x,(ran.nextInt(20))*5*back.y)),ForceMode.Impulse);
+						particleArray[i].transform.size = new Vector2(10*((1+ran.nextInt(2)) - 0.075f*ran.nextInt(50)));
 						particleArray[i].rigidBody.PushTorque((ran.nextInt(20) -10) * 10, ForceMode.Impulse);
 						particleArray[i].objectRenderer.opacity = 0.8f;
 					}

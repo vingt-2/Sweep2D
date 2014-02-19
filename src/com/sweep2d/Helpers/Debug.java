@@ -12,7 +12,7 @@ import com.sweep2d.Maths.Vector3;
 
 public class Debug 
 {
-//	
+	
 //	public void DrawRay(Vector2 origin,Vector2 end)
 //	{
 //		GL2 gl = MainGame.render.externDrawable.getGL().getGL2();

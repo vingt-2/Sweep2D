@@ -36,7 +36,7 @@ public class GameChar extends GameObject
 			rigidBody.Update();
 		
 			// Do shit
-			//WrapPositionAroundScreen();
+			WrapPositionAroundScreen();
 		}
 	}
 	

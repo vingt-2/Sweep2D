@@ -64,13 +64,18 @@ public class Transform
 	{
 		// Homogeneous coordinate to 0 so that it's left untouched by the translation (Direction)
 		Vector4 homogeneous = new Vector4(vector.x,vector.y,0f,0f);
-		return Matrix4.Multiply(transformMatrix,homogeneous).GetVec3().GetVec2();
+	
+		Vector2 result = Matrix4.Multiply(transformMatrix,homogeneous).GetVec3().GetVec2();
+
+		Log.i("Transform_Debug","LocalDirectionToWorld * " + vector.toString() + " = " + result.toString());
+		
+		return result;
 	}
 	
 	public Vector2 LocalPositionToWorld(Vector2 vector)
 	{
 		// Homogeneous coordinate to 1 so that it's affected by the translation (Position)
-		Vector4 homogeneous = new Vector4(vector.x,vector.y,0f,0f);
+		Vector4 homogeneous = new Vector4(vector.x,vector.y,0f,1f);
 		return Matrix4.Multiply(transformMatrix,homogeneous).GetVec3().GetVec2();
 	}
 	

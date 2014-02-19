@@ -67,6 +67,10 @@ public class SharedResources
                 GLES20.GL_REPEAT);
         GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T,
                 GLES20.GL_REPEAT);
+        
+        GLES20.glBlendFunc(GLES20.GL_SRC_ALPHA, GLES20.GL_ONE_MINUS_SRC_ALPHA);
+        GLES20.glEnable(GLES20.GL_BLEND); 
+        
 
 //      USING CONTENT CONTEXT
         InputStream is = null;

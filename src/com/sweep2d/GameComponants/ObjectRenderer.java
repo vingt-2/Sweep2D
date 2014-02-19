@@ -34,6 +34,7 @@ public class ObjectRenderer
 	private int programID;
 	
 	private int mvpLocation;
+	private int opacityLocation;
 	private int textureSamplerLocation;
 	
 	private ArrayList<GLVertexArrayObject> vertexArrayList;
@@ -58,6 +59,7 @@ public class ObjectRenderer
 		programID = MainGame.singleton.sharedResources.GetShaderProgram(materialName);
 		Log.w("Lol","programID: "+ programID);
 		mvpLocation = GLES20.glGetUniformLocation(programID, UNIFORM_MATRIX_MVP);
+		opacityLocation = GLES20.glGetUniformLocation(programID,"opacity");
 		Log.w("lol","MVP " + mvpLocation);
 		textureSamplerLocation = GLES20.glGetUniformLocation(programID, UNIFORM_TEX_SAMPLER);
 		Log.w("lol","texSampler "+ textureSamplerLocation);
@@ -118,6 +120,8 @@ public class ObjectRenderer
 
 		GLES20.glUniformMatrix4fv(mvpLocation, 1, false, mvpArray,0);
 		
+		GLES20.glUniform1f(opacityLocation, opacity);
+		
         GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureID);
         
@@ -151,13 +155,13 @@ public class ObjectRenderer
 		( 
 							 
 				new float[] {
-				            // X, Y, Z, U, V
-				            0f, 0f, 0f,
-				            10.0f, 0f, 0f,
-				            0f,  10f, 0f,
-				            0f, 10f, 0f,
-				            10f, 0f, 0f,
-				            10f,  10f, 0f
+				            // X, Y, Z
+				            -5f, -5f, 0f,
+				            5.0f, -5f, 0f,
+				            -5f,  5f, 0f,
+				            -5f, 5f, 0f,
+				            5f, -5f, 0f,
+				            5f,  5f, 0f
 							},
 				new float[] { 
 								0f, 0f,

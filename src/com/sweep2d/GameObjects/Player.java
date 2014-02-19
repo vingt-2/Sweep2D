@@ -13,7 +13,7 @@ import com.sweep2d.Maths.Vector2;
 public class Player extends GameChar 
 {
 	
-	ParticleEffects effect = new ParticleEffects(transform,2000);
+	ParticleEffects effect = new ParticleEffects(transform,200);
 	long lastTime = 0;
 	final static long effectTimeThreshold = 1000; // wait 000ms to toggle effect
 	
@@ -24,6 +24,7 @@ public class Player extends GameChar
 		objectRenderer.AssignShaderProgram("simpleShader");
 		objectRenderer.SetTexture("rocket_ship");
 		objectRenderer.LoadShape();
+		effect.isTurnedOn = true;
 	}
 	
 	public void Update()
@@ -35,7 +36,7 @@ public class Player extends GameChar
 		PlayerControls();
 		
 		
-		//Vector2 charFrontInWorldCoordinates = transform.LocalDirectionToWorld(new Vector2(0,1)).Normalized();
+		//		Vector2 charFrontInWorldCoordinates = transform.LocalDirectionToWorld(new Vector2(0,1)).Normalized();
 		//		MainGame.debug.DrawLine(transform.position,charFrontInWorldCoordinates,100,Color.Blue);
 		
 	}
@@ -46,7 +47,7 @@ public class Player extends GameChar
 		if(input.x != 0 || input.y != 0)
 		{
 			rigidBody.PushForce(Vector2.Scale(100,Vector2.Add(input,transform.position.negate())), ForceMode.Impulse);
-			 MainGame.singleton.controls.inputVector = new Vector2(0);
+			MainGame.singleton.controls.inputVector = new Vector2(0);
 		}
 	}
 	

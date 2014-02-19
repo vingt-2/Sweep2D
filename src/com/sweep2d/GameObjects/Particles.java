@@ -8,6 +8,7 @@ import com.sweep2d.Maths.Vector2;
 public class Particles extends GameChar
 {
 	long creationTime;
+	long lastTime;
 	long lifeTime;
 
 	public Particles(int lifetime,Vector2 position)
@@ -20,23 +21,27 @@ public class Particles extends GameChar
 
 	public void Update()
 	{  
-		super.Update();
 		long currentTime = System.currentTimeMillis();
-		long timeLived = currentTime - creationTime;
-		
-		objectRenderer.opacity = 1f - (float) timeLived/lifeTime;
-		
-		Vector2 toPlayer = Vector2.Add(MainGame.player.transform.position,transform.position.negate());
-
-		//MainGame.debug.DrawLine(transform.position,toPlayer,toPlayer.GetLength());
-
-		if(toPlayer.GetLength() < 200)
+		if(currentTime - lastTime > (1000 * 1f/60f))
 		{
-			objectRenderer.opacity *= toPlayer.GetLength()/200;
-			if(toPlayer.GetLength() < 100)
+			super.Update();
+			long timeLived = currentTime - creationTime;
+			
+			objectRenderer.opacity = 1f - (float) timeLived/lifeTime;
+			
+			Vector2 toPlayer = Vector2.Add(MainGame.player.transform.position,transform.position.negate());
+	
+			//MainGame.debug.DrawLine(transform.position,toPlayer,toPlayer.GetLength());
+	
+			if(toPlayer.GetLength() < 200)
 			{
-				rigidBody.PushForce(toPlayer.Normalized().Scaled(-30*MainGame.player.rigidBody.velocity.GetLength()), ForceMode.Impulse);
+				objectRenderer.opacity *= toPlayer.GetLength()/200;
+				if(toPlayer.GetLength() < 100)
+				{
+					rigidBody.PushForce(toPlayer.Normalized().Scaled(-130*MainGame.player.rigidBody.velocity.GetLength()), ForceMode.Impulse);
+				}
 			}
+			lastTime = currentTime;
 		}
 	}
 
