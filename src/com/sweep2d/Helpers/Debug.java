@@ -3,11 +3,9 @@ package com.sweep2d.Helpers;
 //import javax.media.opengl.GL2;
 
 import com.sweep2d.Game.MainGame;
-import com.sweep2d.GameComponants.Transform;
-import com.sweep2d.GameComponants.RigidBody.CollisionShape;
-import com.sweep2d.Maths.Matrix3;
+
+import com.sweep2d.GameObjects.GameChar;
 import com.sweep2d.Maths.Vector2;
-import com.sweep2d.Maths.Vector3;
 
 
 public class Debug 
@@ -15,14 +13,11 @@ public class Debug
 	
 //	public void DrawRay(Vector2 origin,Vector2 end)
 //	{
-//		GL2 gl = MainGame.render.externDrawable.getGL().getGL2();
+//		GameChar debugChar = new GameChar();
 //		
-//		gl.glColor3f(1f,0,0);
+//		debugChar.
 //		
-//		gl.glBegin(GL2.GL_LINES);
-//			gl.glVertex2f(origin.x, origin.y);
-//			gl.glVertex2f(end.x,end.y);
-//		gl.glEnd();
+//	//	MainGame.singleton.renderer.debugRenderVector
 //	}
 //	
 //	public void DrawRay(Vector2 origin,Vector2 end,Color color)

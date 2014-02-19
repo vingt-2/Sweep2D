@@ -38,7 +38,7 @@ public class Particles extends GameChar
 				objectRenderer.opacity *= toPlayer.GetLength()/200;
 				if(toPlayer.GetLength() < 100)
 				{
-					rigidBody.PushForce(toPlayer.Normalized().Scaled(-130*MainGame.player.rigidBody.velocity.GetLength()), ForceMode.Impulse);
+					rigidBody.PushForce(toPlayer.Normalized().Scaled(-200*MainGame.player.rigidBody.velocity.GetLength()), ForceMode.Impulse);
 				}
 			}
 			lastTime = currentTime;

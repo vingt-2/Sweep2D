@@ -20,6 +20,8 @@ import android.util.Log;
 
 public class ObjectRenderer 
 {
+	public int renderType = GLES20.GL_TRIANGLES;
+	
 	public Shape shape;
 	
 	private final int FLOAT_SIZE_BYTES = 4;
@@ -164,12 +166,12 @@ public class ObjectRenderer
 				            5f,  5f, 0f
 							},
 				new float[] { 
-								0f, 0f,
-								1f, 0f,
-								0f, 1f,
+								1f, 1f,
 								0f, 1f,
 								1f, 0f,
-								1f, 1f
+								1f, 0f,
+								0f, 1f,
+								0f, 0f
 							}
 		);
 

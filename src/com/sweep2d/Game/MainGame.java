@@ -47,7 +47,8 @@ public class MainGame
 			{
 				new Resource("rocket_ship",new String[]{"textures/rocket_ship.png"},ResourceType.Texture),
 				new Resource("smoke",new String[]{"textures/SmokeParticle.png"},ResourceType.Texture),
-				new Resource("simpleShader", new String[] {"shaders/simpleVertex.glsl","shaders/simpleFragment.glsl"}, ResourceType.ShaderProgram)
+				new Resource("simpleShader", new String[] {"shaders/simple_Vertex.glsl","shaders/simple_Fragment.glsl"}, ResourceType.ShaderProgram),
+				new Resource("debugShader", new String[] {"shaders/debug_Vertex.glsl","shaders/debug_Fragment.glsl"}, ResourceType.ShaderProgram)
 			}
 		);
 

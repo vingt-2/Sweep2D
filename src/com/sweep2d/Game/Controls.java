@@ -1,19 +1,23 @@
 package com.sweep2d.Game;
 
 import com.sweep2d.Maths.Vector2;
-
-import android.content.Context;
-import android.view.MotionEvent;
-import android.view.View;
+import android.util.SparseArray;
 
 public class Controls
 {
-	public Vector2 inputVector;
+	public SparseArray<Vector2> inputVector;
 	
 	public Controls() 
 	{
-		inputVector = new Vector2(0);
+		inputVector = new SparseArray<Vector2>();
+	}
+	
+	public void flush()
+	{
+		inputVector.clear();
 	}
 	
 	
+	
+
 }

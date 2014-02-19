@@ -1,7 +1,10 @@
 package com.sweep2d.GameObjects;
 
 //import java.awt.event.KeyEvent;
+import java.util.List;
+
 import android.util.Log;
+import android.util.SparseArray;
 
 import com.sweep2d.Game.MainGame;
 import com.sweep2d.GameComponants.ObjectRenderer.Shape;
@@ -24,7 +27,8 @@ public class Player extends GameChar
 		objectRenderer.AssignShaderProgram("simpleShader");
 		objectRenderer.SetTexture("rocket_ship");
 		objectRenderer.LoadShape();
-		effect.isTurnedOn = true;
+		effect.transform = this.transform;
+		effect.isTurnedOn = false;
 	}
 	
 	public void Update()
@@ -43,11 +47,33 @@ public class Player extends GameChar
 	
 	private void PlayerControls()
 	{
-		Vector2 input = MainGame.singleton.controls.inputVector;
-		if(input.x != 0 || input.y != 0)
+		SparseArray<Vector2> inputs = MainGame.singleton.controls.inputVector;
+
+		effect.isTurnedOn = false;
+		if(inputs.size() > 0)
 		{
-			rigidBody.PushForce(Vector2.Scale(100,Vector2.Add(input,transform.position.negate())), ForceMode.Impulse);
-			MainGame.singleton.controls.inputVector = new Vector2(0);
+			if(inputs.size() == 1)
+			{
+				int a = -1;
+				
+				for(int i=0; i < inputs.size(); i++)
+				{
+					if(inputs.get(i) != null)
+						a = i;
+				}
+				
+				if(a != -1)
+				{
+					int sign = (inputs.get(a).x < MainGame.Screen_Size.x / 2) ? -1 : 1;
+
+					rigidBody.PushTorque(sign*10, ForceMode.Impulse);
+				}
+			}	
+			else
+			{
+				rigidBody.PushForce(transform.LocalDirectionToWorld(new Vector2(0,50)), ForceMode.Impulse);
+				effect.isTurnedOn = true;
+			}
 		}
 	}
 	

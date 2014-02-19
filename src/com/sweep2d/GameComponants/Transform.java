@@ -66,8 +66,6 @@ public class Transform
 		Vector4 homogeneous = new Vector4(vector.x,vector.y,0f,0f);
 	
 		Vector2 result = Matrix4.Multiply(transformMatrix,homogeneous).GetVec3().GetVec2();
-
-		Log.i("Transform_Debug","LocalDirectionToWorld * " + vector.toString() + " = " + result.toString());
 		
 		return result;
 	}

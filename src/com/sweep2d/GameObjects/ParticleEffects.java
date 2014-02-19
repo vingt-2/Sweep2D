@@ -39,6 +39,7 @@ public class ParticleEffects extends GameObject
 						particleArray[i].objectRenderer.AssignShaderProgram("simpleShader");
 						particleArray[i].objectRenderer.SetTexture("smoke");
 						particleArray[i].objectRenderer.LoadShape();
+						particleArray[i].rigidBody.SetPosition(Vector2.Add(transform.position, Vector2.Scale(10, back)));
 						particleArray[i].rigidBody.frictionCoefficient = 0.01f;
 						particleArray[i].rigidBody.PushForce(Vector2.Scale(100,new Vector2((ran.nextInt(20))*1*back.x,(ran.nextInt(20))*5*back.y)),ForceMode.Impulse);
 						particleArray[i].transform.size = new Vector2(10*((1+ran.nextInt(2)) - 0.075f*ran.nextInt(50)));
