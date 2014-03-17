@@ -3,5 +3,9 @@ gen/
 doc/
 libs/
 res/
+.settings/
+.project
+.classpath
+project.properties
 *.txt
 *.properties
