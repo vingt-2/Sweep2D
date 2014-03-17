@@ -59,12 +59,9 @@ public class ObjectRenderer
 	public boolean AssignShaderProgram(String materialName)
 	{
 		programID = MainGame.singleton.sharedResources.GetShaderProgram(materialName);
-		Log.w("Lol","programID: "+ programID);
 		mvpLocation = GLES20.glGetUniformLocation(programID, UNIFORM_MATRIX_MVP);
 		opacityLocation = GLES20.glGetUniformLocation(programID,"opacity");
-		Log.w("lol","MVP " + mvpLocation);
 		textureSamplerLocation = GLES20.glGetUniformLocation(programID, UNIFORM_TEX_SAMPLER);
-		Log.w("lol","texSampler "+ textureSamplerLocation);
 		return (programID != 0);
 	}
 	

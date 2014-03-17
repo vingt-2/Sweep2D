@@ -75,6 +75,20 @@ public class Player extends GameChar
 				effect.isTurnedOn = true;
 			}
 		}
+		boolean[] arrows = MainGame.singleton.controls.inputArrows;
+		if(arrows[0] == true)
+		{
+			rigidBody.PushForce(transform.LocalDirectionToWorld(new Vector2(0,50)), ForceMode.Impulse);
+			effect.isTurnedOn = true;
+		}
+		if(arrows[2] == true)
+		{
+			rigidBody.PushTorque(10, ForceMode.Impulse);
+		}
+		if(arrows[3] == true)
+		{
+			rigidBody.PushTorque(-1*10, ForceMode.Impulse);
+		}
 	}
 	
 }

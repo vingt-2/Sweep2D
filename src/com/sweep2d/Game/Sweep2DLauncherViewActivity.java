@@ -1,25 +1,18 @@
 package com.sweep2d.Game;
 
-
-
-
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.WindowManager;
 
-import java.io.File;
-
-
-public class BasicGLSurfaceViewActivity extends Activity 
+public class Sweep2DLauncherViewActivity extends Activity 
 {
 
-    private BasicGLSurfaceView mView;
+    private Sweep2DLauncherView mView;
 
     @Override
     protected void onCreate(Bundle icicle) 
     {
         super.onCreate(icicle);
-        mView = new BasicGLSurfaceView(getApplication());
+        mView = new Sweep2DLauncherView(getApplication());
         setContentView(mView);
     }
 

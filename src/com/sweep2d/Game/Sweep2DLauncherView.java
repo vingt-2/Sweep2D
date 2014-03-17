@@ -4,11 +4,12 @@ import com.sweep2d.Maths.Vector2;
 import android.content.Context;
 import android.opengl.GLSurfaceView;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 
-class BasicGLSurfaceView extends GLSurfaceView 
+class Sweep2DLauncherView extends GLSurfaceView 
 {
-    public BasicGLSurfaceView(Context context) 
+    public Sweep2DLauncherView(Context context) 
     {
         super(context);
         setEGLContextClientVersion(2);
@@ -70,6 +71,26 @@ class BasicGLSurfaceView extends GLSurfaceView
 		    }
     	}
     	return true;
+    }
+    
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_W:
+                MainGame.singleton.controls.pressArrow(0);
+                return true;
+            case KeyEvent.KEYCODE_S:
+            	MainGame.singleton.controls.pressArrow(1);
+                return true;
+            case KeyEvent.KEYCODE_A:
+            	MainGame.singleton.controls.pressArrow(2);
+                return true;
+            case KeyEvent.KEYCODE_D:
+            	MainGame.singleton.controls.pressArrow(3);
+                return true;
+            default:
+                return super.onKeyUp(keyCode, event);
+        }
     }
     
 }

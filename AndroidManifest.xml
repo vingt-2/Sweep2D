@@ -9,7 +9,7 @@
     <application
         android:allowBackup="true"
         android:label="Sweep_Test">
-        <activity android:name="Sweep2D">
+        <activity android:name="Sweep2DLauncherViewActivity">
               android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
                 android:launchMode="singleTask"
                 android:configChanges="orientation|keyboardHidden">
