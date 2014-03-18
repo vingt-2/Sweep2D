@@ -2,6 +2,8 @@ package com.sweep2d.Game;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.Window;
+import android.view.WindowManager;
 
 public class Sweep2DLauncherViewActivity extends Activity 
 {
@@ -13,6 +15,7 @@ public class Sweep2DLauncherViewActivity extends Activity
     {
         super.onCreate(icicle);
         mView = new Sweep2DLauncherView(getApplication());
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(mView);
     }
 

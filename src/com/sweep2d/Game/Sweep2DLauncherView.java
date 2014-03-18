@@ -13,6 +13,7 @@ class Sweep2DLauncherView extends GLSurfaceView
     {
         super(context);
         setEGLContextClientVersion(2);
+        setSystemUiVisibility(SYSTEM_UI_FLAG_FULLSCREEN);
         setRenderer(new com.sweep2d.Engine.Renderer(context));
     }
     
